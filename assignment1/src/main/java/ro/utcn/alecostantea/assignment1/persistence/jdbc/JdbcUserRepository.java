@@ -3,6 +3,7 @@ package ro.utcn.alecostantea.assignment1.persistence.jdbc;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Component;
 import ro.utcn.alecostantea.assignment1.model.User;
 import ro.utcn.alecostantea.assignment1.persistence.api.UserRepository;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Component
 @RequiredArgsConstructor
 public class JdbcUserRepository implements UserRepository {
     private final JdbcTemplate template;

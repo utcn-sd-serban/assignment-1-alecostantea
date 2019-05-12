@@ -75,7 +75,7 @@ public class JdbcTagRepository implements TagRepository {
 
        return template.query("SELECT * FROM question JOIN tag ON question.id = tag.questionId WHERE tag.id = ?",
                 (resultSet,i) -> new Question(resultSet.getInt("id"),
-                        resultSet.getString("title"), resultSet.getString("text")),
+                        resultSet.getString("title"), resultSet.getString("text"),resultSet.getString("author")),
                tag.getId());
     }
 

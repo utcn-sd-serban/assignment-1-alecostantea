@@ -31,7 +31,7 @@ public class JdbcQuestionRepository implements QuestionRepository {
     public Optional<Question> findById(int id) {
         List<Question> questions = template.query("SELECT * FROM question WHERE id = ?",
                 (resultSet,i) -> new Question(resultSet.getInt("id"),
-                        resultSet.getString("title"), resultSet.getString("text")),
+                        resultSet.getString("title"), resultSet.getString("text"),resultSet.getString("author")),
                 id);
         return questions.isEmpty() ? Optional.empty() : Optional.of(questions.get(0));
     }
@@ -44,7 +44,7 @@ public class JdbcQuestionRepository implements QuestionRepository {
     @Override
     public List<Question> findAll() {
         return template.query("SELECT * FROM question", (resultSet,i) ->
-                new Question(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("text")));
+                new Question(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("text"),resultSet.getString("author")));
     }
 
     private int insert(Question question) {
@@ -55,13 +55,14 @@ public class JdbcQuestionRepository implements QuestionRepository {
         Map<String, Object> data = new HashMap<>();
         data.put("title",question.getTitle());
         data.put("text", question.getText());
+        data.put("author",question.getAuthor());
         return insert.executeAndReturnKey(data).intValue();
 
 
     }
 
     private void update(Question question){
-        template.update("UPDATE question SET title = ?, text = ? WHERE id = ?",
-                question.getTitle(), question.getText(), question.getId());
+        template.update("UPDATE question SET title = ?, text = ?, author = ? WHERE id = ?",
+                question.getTitle(), question.getText(),question.getAuthor(), question.getId());
     }
 }

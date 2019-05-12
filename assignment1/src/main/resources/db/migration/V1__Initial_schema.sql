@@ -2,11 +2,12 @@ CREATE TABLE `stackoverflow`.`question` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `text` VARCHAR(45) NOT NULL,
+  `author` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`));
   CREATE TABLE `stackoverflow`.`user` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(45) NOT NULL,
-    `password` VARCHAR(45) NOT NULL,
+    `password` VARCHAR(151) NOT NULL,
     PRIMARY KEY (`id`));
 
     CREATE TABLE `stackoverflow`.`tag` (

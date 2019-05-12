@@ -2,7 +2,6 @@ package ro.utcn.alecostantea.assignment1.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import ro.utcn.alecostantea.assignment1.model.Question;
 import ro.utcn.alecostantea.assignment1.model.Tag;
 import ro.utcn.alecostantea.assignment1.model.User;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-@Component
+//@Component
 @RequiredArgsConstructor
 
 public class ConsoleController implements CommandLineRunner {
@@ -29,7 +28,7 @@ public class ConsoleController implements CommandLineRunner {
 
         boolean done = false;
         //put one user in the database to see if we can login
-        userService.save(new User(0,"alexandra","0000"));
+       // userService.save(new User(0,"alexandra","0000"));
         while(!done){
             print("Enter a command: ");
             String command = scanner.next().trim();
@@ -63,7 +62,7 @@ public class ConsoleController implements CommandLineRunner {
                 String text = scanner.nextLine().trim();
                 print("enter tags:");
                 String[] tags = scanner.nextLine().split(" ");
-                Question question = new Question(0,title,text);
+                Question question = new Question(0,title,text,user.getUsername());
                 questionService.save(question);
                 for(String t : tags){
                     tagService.save(new Tag(0,t,question.getId()));
